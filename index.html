@@ -3,316 +3,364 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Price vs Volume — Is It Proportional?</title>
+<title>Price vs Volume — 7.4 Activity 2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500;600&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f5f4f0;--surface:#fff;--surface2:#f0ede8;--border:#d8d4cc;
-  --text:#1a1814;--text2:#5a5650;--text3:#9a958e;
-  --blue:#2c5f9e;--red:#c0392b;--green:#1a7a4a;--orange:#e08020;
-  --purple:#7a5cb0;
-  --font:'DM Sans',-apple-system,sans-serif;--mono:'DM Mono',monospace;
+  --ink:#0f0e0c;--paper:#f7f5f0;--cream:#ede9e1;--rule:#c8c2b5;
+  --accent:#d63a1f;--blue:#1a5fa8;--gold:#c8820a;--green:#1e6e42;
+  --display:'Bebas Neue',Impact,sans-serif;
+  --mono:'DM Mono',monospace;--body:'DM Sans',sans-serif;
 }
-body{font-family:var(--font);background:var(--bg);color:var(--text);
-  min-height:100vh;-webkit-font-smoothing:antialiased;padding:24px 16px}
-.app{max-width:920px;margin:0 auto}
-.head{display:flex;align-items:center;gap:14px;margin-bottom:24px}
-.head-ic{width:42px;height:42px;border-radius:10px;background:var(--surface2);
-  border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;
-  font-family:var(--mono);font-weight:600;color:var(--text2);font-size:16px;flex-shrink:0}
-.lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text3);margin-bottom:3px}
-.title{font-size:22px;font-weight:700;line-height:1.2}
-.card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:22px;margin-bottom:16px}
-.intro{font-size:14px;color:var(--text2);line-height:1.65;margin-bottom:18px}
-.intro strong{color:var(--text)}
+html{background:var(--paper)}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);
+  min-height:100vh;-webkit-font-smoothing:antialiased;padding:0}
 
-/* Product tabs */
-.prod-toggle{display:flex;gap:0;background:var(--surface2);border:1.5px solid var(--border);
-  border-radius:8px;padding:3px;width:fit-content;margin:0 auto 20px;flex-wrap:wrap}
-.prod-toggle button{padding:8px 14px;border:none;background:transparent;border-radius:6px;
-  font-family:var(--font);font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .15s}
-.prod-toggle button.active{background:var(--surface);color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,.06)}
+/* ── MASTHEAD ── */
+.masthead{border-bottom:3px solid var(--ink);padding:18px 28px 14px;
+  display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:baseline}
+.mast-tag{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink);opacity:.45;white-space:nowrap}
+.mast-title{font-family:var(--display);font-size:clamp(30px,7vw,62px);line-height:.92;
+  letter-spacing:.02em;text-align:center}
+.mast-sub{font-family:var(--mono);font-size:10px;color:var(--ink);opacity:.45;
+  text-align:right;white-space:nowrap}
+@media(max-width:540px){
+  .masthead{grid-template-columns:1fr;gap:4px}
+  .mast-tag,.mast-sub{display:none}
+  .mast-title{font-size:clamp(28px,10vw,52px)}
+}
 
-/* Editable table */
-.tbl-wrap{overflow-x:auto;margin-bottom:18px}
-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:14px}
-thead th{background:var(--surface2);border:1.5px solid var(--border);padding:10px 12px;
-  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text2);text-align:left}
-tbody tr{border-bottom:1px solid var(--border)}
-tbody tr:last-child{border-bottom:none}
-tbody td{padding:8px 12px;border-right:1px solid var(--border);vertical-align:middle}
-tbody td:last-child{border-right:none}
-tbody td.label-col{font-weight:600;color:var(--text);min-width:110px;background:var(--surface2)}
-tbody td input{width:100%;border:1.5px solid var(--border);border-radius:5px;padding:5px 7px;
-  font-family:var(--mono);font-size:14px;font-weight:600;color:var(--text);background:var(--surface);
-  outline:none;text-align:right;min-width:70px}
-tbody td input:focus{border-color:var(--blue)}
-tbody td.unit-rate{font-weight:700;text-align:right}
-tbody td.verdict{text-align:center;font-weight:700;font-size:16px}
-tr.best-deal td{background:#f0f7f3}
+/* ── INTRO ── */
+.intro-strip{padding:16px 28px;border-bottom:1px solid var(--rule);
+  font-size:14px;line-height:1.65;color:var(--ink);opacity:.7;max-width:680px}
+.intro-strip strong{opacity:1;color:var(--ink)}
 
-/* Bar chart */
-.chart-wrap{background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;
-  padding:20px;margin-bottom:14px;overflow-x:auto}
-.chart-wrap svg{display:block;max-width:100%}
+/* ── PRODUCT TABS ── */
+.prod-bar{display:flex;border-bottom:2px solid var(--ink)}
+.prod-btn{padding:12px 22px;border:none;background:transparent;
+  font-family:var(--display);font-size:18px;letter-spacing:.04em;
+  color:var(--ink);opacity:.4;cursor:pointer;border-bottom:3px solid transparent;
+  margin-bottom:-2px;transition:all .15s;white-space:nowrap}
+.prod-btn.active{opacity:1;border-bottom-color:var(--ink)}
+.prod-btn:hover:not(.active){opacity:.7}
 
-/* Stats row */
-.stats{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
-.stat-cell{flex:1;min-width:120px;padding:12px 14px;background:var(--surface);border:1.5px solid var(--border);
-  border-radius:9px;text-align:center}
-.stat-cell .sc-lbl{font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
-.stat-cell .sc-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--text)}
-.stat-cell .sc-sub{font-family:var(--mono);font-size:10px;color:var(--text3);margin-top:2px}
+/* ── TABLE ── */
+.tbl-section{padding:20px 28px;border-bottom:1px solid var(--rule);overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:13px}
+thead th{padding:8px 12px;border-bottom:2px solid var(--ink);font-size:10px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink);opacity:.5;text-align:right}
+thead th:first-child{text-align:left;opacity:.5}
+tbody tr{border-bottom:1px solid var(--rule);transition:background .1s}
+tbody tr.best td{background:#f0f7e8}
+tbody tr.worst td{background:#fdf0ee}
+tbody td{padding:9px 12px;border-right:none;vertical-align:middle}
+tbody td:first-child{font-weight:600;color:var(--ink)}
+.editable{background:transparent;border:1.5px solid transparent;border-radius:4px;
+  padding:4px 6px;font-family:var(--mono);font-size:13px;font-weight:600;color:var(--ink);
+  outline:none;text-align:right;width:80px;transition:border .12s}
+.editable:focus{border-color:var(--blue);background:var(--paper)}
+.label-input{text-align:left;width:110px;font-weight:600}
+.rate-cell{font-weight:700;text-align:right}
+.rate-cell.best{color:var(--green)}
+.rate-cell.worst{color:var(--accent)}
+.rate-cell.mid{color:var(--ink)}
+.verdict-cell{text-align:center;font-size:16px}
+.row-del{border:none;background:none;color:var(--rule);cursor:pointer;font-size:16px;
+  padding:0 4px;transition:color .12s}
+.row-del:hover{color:var(--accent)}
 
-/* Proportionality verdict */
-.prop-verdict{padding:14px 18px;border-radius:10px;border:1.5px solid;text-align:center;
-  font-family:var(--mono);font-size:15px;font-weight:700;margin-bottom:14px}
-.prop-verdict.proportional{background:#f0f7f3;border-color:var(--green);color:var(--green)}
-.prop-verdict.not-proportional{background:#fbf2f0;border-color:var(--red);color:var(--red)}
+/* ── ROW CONTROLS ── */
+.tbl-controls{padding:10px 28px;border-bottom:1px solid var(--rule);display:flex;gap:8px}
+.ctrl-btn{padding:6px 14px;border:1.5px solid var(--rule);background:transparent;
+  font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink);opacity:.55;cursor:pointer;transition:all .12s}
+.ctrl-btn:hover{border-color:var(--ink);opacity:1}
+.ctrl-btn.danger{border-color:var(--accent);color:var(--accent);opacity:.7}
+.ctrl-btn.danger:hover{opacity:1}
 
-.insight{background:#fff8f0;border:1px solid #f0d8c0;border-left:3px solid var(--orange);
-  border-radius:0 8px 8px 0;padding:12px 15px;font-size:13px;color:#6b4400;line-height:1.65}
-.insight strong{color:#4a2e00}
+/* ── PROP VERDICT BAND ── */
+.verdict-band{padding:16px 28px;border-bottom:1.5px solid var(--ink);
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.v-badge{font-family:var(--display);font-size:24px;letter-spacing:.06em;
+  padding:8px 18px;border:2.5px solid currentColor;white-space:nowrap}
+.v-badge.prop{color:var(--green)}
+.v-badge.not-prop{color:var(--accent)}
+.v-detail{font-family:var(--mono);font-size:12px;color:var(--ink);opacity:.6;line-height:1.6}
 
-/* Add/remove row */
-.row-controls{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
-.btn-sm{padding:7px 12px;border-radius:7px;background:var(--surface);border:1.5px solid var(--border);
-  font-family:var(--font);font-size:12px;color:var(--text2);cursor:pointer;font-weight:600;transition:all .12s}
-.btn-sm:hover{border-color:var(--text3);color:var(--text)}
-.btn-sm.danger{border-color:var(--red);color:var(--red)}
+/* ── CHART ── */
+.chart-section{padding:24px 28px;border-bottom:1px solid var(--rule)}
+.chart-head{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink);opacity:.4;margin-bottom:16px}
+.chart-inner{overflow-x:auto}
+
+/* ── STATS BAND ── */
+.stats-band{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--rule)}
+.stat-cell{padding:18px 22px;border-right:1px solid var(--rule);display:flex;flex-direction:column;gap:3px}
+.stat-cell:last-child{border-right:none}
+.stat-lbl{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink);opacity:.4}
+.stat-big{font-family:var(--display);font-size:clamp(28px,4vw,44px);letter-spacing:.02em;line-height:1}
+.stat-big.green{color:var(--green)}
+.stat-big.red{color:var(--accent)}
+.stat-sub{font-family:var(--mono);font-size:11px;color:var(--ink);opacity:.45}
+@media(max-width:540px){.stats-band{grid-template-columns:1fr 1fr}
+  .stat-cell:nth-child(2){border-right:none}
+  .stat-cell:last-child{grid-column:1/-1;border-top:1px solid var(--rule)}}
+
+/* ── INSIGHT ── */
+.insight-row{padding:20px 28px;display:grid;grid-template-columns:3px 1fr;gap:16px}
+.ins-bar{background:var(--gold)}
+.ins-bar.warn{background:var(--accent)}
+.ins-text{font-size:14px;line-height:1.75;color:var(--ink);opacity:.7}
+.ins-text strong{opacity:1;color:var(--ink)}
 </style>
 </head>
 <body>
-<div class="app">
-  <div class="head">
-    <div class="head-ic">7.4</div>
-    <div>
-      <div class="lbl">Chapter 7 · Section 7.4 Activity 2</div>
-      <div class="title">Price vs Volume — Is It Proportional?</div>
-    </div>
-  </div>
 
-  <div class="card">
-    <p class="intro">
-      If price is proportional to volume, every size gives the same <strong>price per mL</strong>. In real markets, bigger containers often give a better unit rate — bulk is cheaper. Edit the prices below and watch the unit-rate bars. Are they all the same height? If yes, price and volume are proportional. If not, some sizes are better deals than others.
-    </p>
-
-    <div class="prod-toggle" id="prod-tabs"></div>
-
-    <div class="tbl-wrap">
-      <table id="main-table">
-        <thead>
-          <tr>
-            <th>Container</th>
-            <th style="text-align:right">Volume (mL)</th>
-            <th style="text-align:right">Price (₹)</th>
-            <th style="text-align:right">₹ per 100 mL</th>
-            <th style="text-align:center">Best deal?</th>
-          </tr>
-        </thead>
-        <tbody id="table-body"></tbody>
-      </table>
-    </div>
-
-    <div class="row-controls">
-      <button class="btn-sm" id="add-row">+ Add size</button>
-      <button class="btn-sm danger" id="reset-btn">Reset to textbook values</button>
-    </div>
-
-    <div class="prop-verdict" id="prop-verdict"></div>
-
-    <div class="chart-wrap" id="chart"></div>
-
-    <div class="stats" id="stats"></div>
-
-    <div class="insight" id="insight"></div>
-  </div>
+<div class="masthead">
+  <div class="mast-tag">Ch. 7 · §7.4 Activity 2 · Proportion</div>
+  <div class="mast-title">Price vs Volume</div>
+  <div class="mast-sub">Grade 8 · Oxford / Bhanzu</div>
 </div>
 
+<div class="intro-strip">
+  If price is truly <strong>proportional to volume</strong>, every size gives the same price per unit. Edit any price below and watch the bars. Equal bar heights = proportional.
+</div>
+
+<div class="prod-bar" id="prod-bar"></div>
+
+<div class="tbl-section">
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align:left">Container</th>
+        <th>Volume</th>
+        <th>Price (₹)</th>
+        <th>₹ per 100 units</th>
+        <th>Deal</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+</div>
+
+<div class="tbl-controls">
+  <button class="ctrl-btn" id="add-row">+ Add size</button>
+  <button class="ctrl-btn danger" id="reset-btn">Reset</button>
+</div>
+
+<div class="verdict-band" id="verdict-band"></div>
+
+<div class="chart-section">
+  <div class="chart-head">Unit rate per 100 units — equal bars = proportional</div>
+  <div class="chart-inner" id="chart"></div>
+</div>
+
+<div class="stats-band" id="stats-band"></div>
+
+<div class="insight-row" id="insight-row"></div>
+
 <script>
-const PRODUCTS = {
-  shampoo: {
-    name: 'Shampoo',
-    unit: 'mL',
-    rows: [
-      { label: 'Sachet',        vol: 6,    price: 2 },
-      { label: 'Small bottle',  vol: 180,  price: 154 },
-      { label: 'Medium bottle', vol: 340,  price: 276 },
-      { label: 'Large bottle',  vol: 1000, price: 540 },
-    ]
-  },
-  rice: {
-    name: 'Rice',
-    unit: 'g',
-    rows: [
-      { label: '500 g pack',    vol: 500,  price: 40 },
-      { label: '1 kg bag',      vol: 1000, price: 75 },
-      { label: '5 kg bag',      vol: 5000, price: 350 },
-      { label: '10 kg bag',     vol: 10000, price: 650 },
-    ]
-  },
-  coffee: {
-    name: 'Filter Coffee',
-    unit: 'mL',
-    rows: [
-      { label: 'Regular 15:35', vol: 50,  price: 30 },
-      { label: 'Strong 20:30',  vol: 50,  price: 35 },
-      { label: 'Light 10:40',   vol: 50,  price: 25 },
-    ]
-  }
+const PRODUCTS={
+  shampoo:{name:'Shampoo',unit:'mL',rows:[
+    {label:'Sachet',vol:6,price:2},
+    {label:'Small bottle',vol:180,price:154},
+    {label:'Medium bottle',vol:340,price:276},
+    {label:'Large bottle',vol:1000,price:540}
+  ]},
+  rice:{name:'Rice',unit:'g',rows:[
+    {label:'500 g pack',vol:500,price:40},
+    {label:'1 kg bag',vol:1000,price:75},
+    {label:'5 kg bag',vol:5000,price:350},
+    {label:'10 kg bag',vol:10000,price:650}
+  ]},
+  coffee:{name:'Filter Coffee',unit:'mL',rows:[
+    {label:'Regular 15:35',vol:50,price:30},
+    {label:'Strong 20:30',vol:50,price:35},
+    {label:'Light 10:40',vol:50,price:25}
+  ]}
 };
 
-let state = {
-  product: 'shampoo',
-  rows: JSON.parse(JSON.stringify(PRODUCTS.shampoo.rows))
-};
+const st={product:'shampoo',rows:JSON.parse(JSON.stringify(PRODUCTS.shampoo.rows))};
 
-// Build product tabs
-document.getElementById('prod-tabs').innerHTML = Object.entries(PRODUCTS).map(([k,v]) =>
-  `<button data-prod="${k}" class="${k===state.product?'active':''}">${v.name}</button>`
-).join('');
-document.querySelectorAll('.prod-toggle button').forEach(b => {
-  b.addEventListener('click', () => {
-    state.product = b.dataset.prod;
-    state.rows = JSON.parse(JSON.stringify(PRODUCTS[state.product].rows));
-    document.querySelectorAll('.prod-toggle button').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    render();
+// Product tabs
+const prodBar=document.getElementById('prod-bar');
+function buildTabs(){
+  prodBar.innerHTML=Object.entries(PRODUCTS).map(([k,v])=>
+    `<button class="prod-btn ${k===st.product?'active':''}" data-p="${k}">${v.name}</button>`
+  ).join('');
+  prodBar.querySelectorAll('.prod-btn').forEach(b=>{
+    b.addEventListener('click',()=>{
+      st.product=b.dataset.p;
+      st.rows=JSON.parse(JSON.stringify(PRODUCTS[st.product].rows));
+      buildTabs();render();
+    });
   });
+}
+
+document.getElementById('add-row').addEventListener('click',()=>{
+  st.rows.push({label:'New size',vol:500,price:50});render();
+});
+document.getElementById('reset-btn').addEventListener('click',()=>{
+  st.rows=JSON.parse(JSON.stringify(PRODUCTS[st.product].rows));render();
 });
 
-document.getElementById('add-row').addEventListener('click', () => {
-  state.rows.push({ label: 'New size', vol: 500, price: 50 });
-  render();
-});
-document.getElementById('reset-btn').addEventListener('click', () => {
-  state.rows = JSON.parse(JSON.stringify(PRODUCTS[state.product].rows));
-  render();
-});
+function rate(r){return(r.price/r.vol)*100;}
 
-function unitRate(vol, price){ return (price / vol) * 100; } // per 100 mL
+// Data-driven insight generation
+function generateInsight(rows,rates,bestIdx,worstIdx,isProp,unit){
+  const best=rows[bestIdx],worst=rows[worstIdx];
+  const bestRate=rates[bestIdx],worstRate=rates[worstIdx];
+  const saving=((worstRate-bestRate)/worstRate*100).toFixed(1);
+  const mul=(worstRate/bestRate).toFixed(2);
+
+  if(isProp){
+    return `All sizes give the same unit rate — price and volume are <strong>truly proportional</strong>. Every rupee buys the same amount regardless of container size. This is uncommon in real markets; companies typically use price variation to steer buyers toward certain sizes.`;
+  }
+
+  // Work out whether the pattern is "bigger = cheaper" or something else
+  const volOrder=[...rows].map((r,i)=>({vol:r.vol,rate:rates[i],label:r.label})).sort((a,b)=>a.vol-b.vol);
+  const ratesByVol=volOrder.map(r=>r.rate);
+  const biggerIsCheaper=ratesByVol.every((r,i)=>i===0||r<=ratesByVol[i-1]);
+  const smallerIsCheaper=ratesByVol.every((r,i)=>i===0||r>=ratesByVol[i-1]);
+
+  let patternNote='';
+  if(biggerIsCheaper){
+    patternNote=`The pattern here is <strong>bulk discount</strong> — larger volumes cost less per ${unit}. The largest pack (${rows[rows.map(r=>r.vol).indexOf(Math.max(...rows.map(r=>r.vol)))].label}) is the best value.`;
+  } else if(smallerIsCheaper){
+    patternNote=`Unusually, <strong>smaller sizes are cheaper per ${unit}</strong> here. This can happen with premium large-format packaging, or when small sachets are used as loss-leaders to attract buyers.`;
+  } else {
+    patternNote=`The pattern is <strong>irregular</strong> — neither strictly "bigger is cheaper" nor "smaller is cheaper." Some mid-sizes may be poorly priced, or represent different product grades.`;
+  }
+
+  return `The unit rates differ by ×${mul}, so price and volume are <strong>not proportional</strong>. The <strong>${best.label}</strong> gives the best deal at ₹${bestRate.toFixed(2)} per 100 ${unit} — that's ${saving}% cheaper per unit than the <strong>${worst.label}</strong> at ₹${worstRate.toFixed(2)}. ${patternNote}`;
+}
 
 function render(){
-  const rows = state.rows;
-  const rates = rows.map(r => unitRate(r.vol, r.price));
-  const minRate = Math.min(...rates);
-  const maxRate = Math.max(...rates);
-  const isProp = (maxRate - minRate) / minRate < 0.02; // within 2% = proportional
+  const rows=st.rows;
+  const rates=rows.map(r=>rate(r));
+  const minRate=Math.min(...rates);
+  const maxRate=Math.max(...rates);
+  const bestIdx=rates.indexOf(minRate);
+  const worstIdx=rates.indexOf(maxRate);
+  const isProp=(maxRate-minRate)/Math.max(minRate,0.001)<0.02;
+  const unit=PRODUCTS[st.product].unit;
 
   // Table
-  const tbody = document.getElementById('table-body');
-  tbody.innerHTML = rows.map((r, i) => {
-    const rate = rates[i];
-    const isBest = Math.abs(rate - minRate) < 0.01;
-    return `<tr class="${isBest?'best-deal':''}">
-      <td class="label-col"><input value="${r.label}" data-field="label" data-i="${i}" style="text-align:left;font-weight:600;background:transparent;border:none;width:100%"></td>
-      <td><input type="number" value="${r.vol}" data-field="vol" data-i="${i}" min="1"></td>
-      <td><input type="number" value="${r.price}" data-field="price" data-i="${i}" min="0.01" step="0.5"></td>
-      <td class="unit-rate" style="color:${isBest?'var(--green)':rate===maxRate?'var(--red)':'var(--text)'}">
-        ₹${rate.toFixed(2)}
-      </td>
-      <td class="verdict">${isBest ? '✓' : ''}</td>
+  const tbody=document.getElementById('table-body');
+  tbody.innerHTML=rows.map((r,i)=>{
+    const rt=rates[i];
+    const isBest=i===bestIdx;
+    const isWorst=i===worstIdx&&!isProp;
+    const rateClass=isBest?'best':isWorst?'worst':'mid';
+    const rowClass=isBest&&!isProp?'best':isWorst?'worst':'';
+    return `<tr class="${rowClass}" data-i="${i}">
+      <td><input class="editable label-input" data-f="label" data-i="${i}" value="${r.label}"></td>
+      <td style="text-align:right"><input class="editable" type="number" data-f="vol" data-i="${i}" value="${r.vol}" min="1"></td>
+      <td style="text-align:right"><input class="editable" type="number" data-f="price" data-i="${i}" value="${r.price}" min="0.01" step="0.5"></td>
+      <td class="rate-cell ${rateClass}">₹${rt.toFixed(2)}</td>
+      <td class="verdict-cell">${isBest&&!isProp?'✓ best':isWorst?'✗ costly':''}</td>
+      <td><button class="row-del" data-i="${i}" title="Remove">×</button></td>
     </tr>`;
   }).join('');
 
-  // Wire up inputs
-  tbody.querySelectorAll('input').forEach(inp => {
-    inp.addEventListener('change', e => {
-      const i = +e.target.dataset.i, field = e.target.dataset.field;
-      if(field === 'vol' || field === 'price') state.rows[i][field] = +e.target.value || 1;
-      else state.rows[i][field] = e.target.value;
+  tbody.querySelectorAll('.editable').forEach(inp=>{
+    inp.addEventListener('change',e=>{
+      const i=+e.target.dataset.i,f=e.target.dataset.f;
+      if(f==='vol'||f==='price') st.rows[i][f]=+e.target.value||1;
+      else st.rows[i][f]=e.target.value;
       render();
     });
   });
-
-  // Proportionality verdict
-  const vEl = document.getElementById('prop-verdict');
-  if(isProp){
-    vEl.className = 'prop-verdict proportional';
-    vEl.textContent = '✓ Price is proportional to volume — all sizes give the same unit rate';
-  } else {
-    vEl.className = 'prop-verdict not-proportional';
-    vEl.textContent = `✗ Price is NOT proportional to volume — unit rates differ by ${((maxRate-minRate)/minRate*100).toFixed(1)}%`;
-  }
-
-  // Bar chart
-  const W = 720, H = 200, padL = 60, padB = 50, padT = 20, padR = 20;
-  const plotW = W - padL - padR, plotH = H - padT - padB;
-  const n = rows.length;
-  const barW = Math.min(80, (plotW / n) * 0.6);
-  const barGap = plotW / n;
-  const rateRange = maxRate - minRate;
-  const chartMax = maxRate * 1.15;
-
-  const COLORS = ['#2c5f9e','#e08020','#1a7a4a','#7a5cb0','#c0392b','#0d7575'];
-
-  let svg = `<svg viewBox="0 0 ${W} ${H}" width="${W}" style="max-width:100%">`;
-  // If proportional, show reference line
-  if(isProp){
-    const refY = padT + plotH - (minRate / chartMax) * plotH;
-    svg += `<line x1="${padL}" y1="${refY}" x2="${padL+plotW}" y2="${refY}" stroke="var(--green)" stroke-width="1.5" stroke-dasharray="5 4"/>`;
-  }
-
-  rows.forEach((r, i) => {
-    const rate = rates[i];
-    const barH = (rate / chartMax) * plotH;
-    const x = padL + i * barGap + barGap/2 - barW/2;
-    const y = padT + plotH - barH;
-    const isBest = Math.abs(rate - minRate) < 0.01;
-    const color = isBest ? 'var(--green)' : (Math.abs(rate-maxRate)<0.01 ? 'var(--red)' : COLORS[i % COLORS.length]);
-    svg += `<rect x="${x}" y="${y}" width="${barW}" height="${barH}" rx="4" fill="${color}" opacity="0.85"/>`;
-    // Rate label on top of bar
-    svg += `<text x="${x+barW/2}" y="${y-5}" text-anchor="middle" font-family="DM Mono,monospace" font-size="11" font-weight="700" fill="${color}">₹${rate.toFixed(1)}</text>`;
-    // Container label below
-    const labelY = padT + plotH + 18;
-    const shortLabel = r.label.length > 10 ? r.label.slice(0,10)+'…' : r.label;
-    svg += `<text x="${x+barW/2}" y="${labelY}" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="var(--text2)">${shortLabel}</text>`;
-    svg += `<text x="${x+barW/2}" y="${labelY+12}" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="var(--text3)">${r.vol}mL</text>`;
+  tbody.querySelectorAll('.row-del').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      const i=+e.target.dataset.i;
+      if(st.rows.length>2){st.rows.splice(i,1);render();}
+    });
   });
 
-  // Y axis label
-  svg += `<text x="12" y="${padT+plotH/2}" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="var(--text3)" font-weight="600" transform="rotate(-90 12 ${padT+plotH/2})">₹ per 100 mL</text>`;
-  svg += `<line x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT+plotH}" stroke="var(--border)" stroke-width="1"/>`;
-  svg += `<line x1="${padL}" y1="${padT+plotH}" x2="${padL+plotW}" y2="${padT+plotH}" stroke="var(--border)" stroke-width="1"/>`;
+  // Verdict band
+  const vb=document.getElementById('verdict-band');
+  if(isProp){
+    vb.innerHTML=`<div class="v-badge prop">✓ Proportional</div>
+      <div class="v-detail">All sizes give the same unit rate — price is proportional to volume</div>`;
+  } else {
+    const diff=((maxRate-minRate)/minRate*100).toFixed(1);
+    vb.innerHTML=`<div class="v-badge not-prop">✗ Not Proportional</div>
+      <div class="v-detail">Unit rates differ by ${diff}% — price is <em>not</em> proportional to volume</div>`;
+  }
 
-  svg += `</svg>`;
-  document.getElementById('chart').innerHTML = svg;
+  // Chart — horizontal bar chart, each bar = unit rate
+  const chartMax=maxRate*1.2;
+  const BAR_H=36,GAP=10,PAD_L=120,PAD_R=24,CHART_W=660,PAD_T=10,PAD_B=8;
+  const totalH=rows.length*(BAR_H+GAP)+PAD_T+PAD_B;
+  const plotW=CHART_W-PAD_L-PAD_R;
+
+  // Reference line (only if proportional — flat)
+  let refLine='';
+  if(isProp){
+    const refX=PAD_L+(minRate/chartMax)*plotW;
+    refLine=`<line x1="${refX}" y1="${PAD_T}" x2="${refX}" y2="${PAD_T+rows.length*(BAR_H+GAP)-GAP}" stroke="#1e6e42" stroke-width="1.5" stroke-dasharray="5 4" opacity=".7"/>`;
+  }
+
+  const COLORS=['#1a5fa8','#c8820a','#1e6e42','#7a4aa8','#d63a1f','#0d7575'];
+  let bars=rows.map((r,i)=>{
+    const rt=rates[i];
+    const barW=(rt/chartMax)*plotW;
+    const y=PAD_T+i*(BAR_H+GAP);
+    const isBest=i===bestIdx;
+    const isWorst=i===worstIdx&&!isProp;
+    const col=isBest&&!isProp?'#1e6e42':isWorst?'#d63a1f':COLORS[i%COLORS.length];
+    const shortLabel=r.label.length>14?r.label.slice(0,14)+'…':r.label;
+    return `
+      <rect x="${PAD_L}" y="${y}" width="${barW}" height="${BAR_H}" rx="0" fill="${col}" opacity="${isBest||isWorst?1:.7}"/>
+      <text x="${PAD_L-8}" y="${y+BAR_H/2+5}" text-anchor="end" font-family="DM Mono,monospace" font-size="12" font-weight="600" fill="#0f0e0c" opacity=".7">${shortLabel}</text>
+      <text x="${PAD_L+barW+6}" y="${y+BAR_H/2+5}" font-family="DM Mono,monospace" font-size="13" font-weight="700" fill="${col}">₹${rt.toFixed(2)}</text>
+      ${isBest&&!isProp?`<text x="${PAD_L+barW+56}" y="${y+BAR_H/2+5}" font-family="DM Mono,monospace" font-size="11" fill="#1e6e42" opacity=".8">← best</text>`:''}
+      ${isWorst?`<text x="${PAD_L+barW+56}" y="${y+BAR_H/2+5}" font-family="DM Mono,monospace" font-size="11" fill="#d63a1f" opacity=".8">← costliest</text>`:''}
+    `;
+  }).join('');
+
+  document.getElementById('chart').innerHTML=
+    `<svg viewBox="0 0 ${CHART_W} ${totalH}" width="${CHART_W}" style="max-width:100%;display:block">
+      ${refLine}${bars}
+      <line x1="${PAD_L}" y1="${PAD_T}" x2="${PAD_L}" y2="${totalH-PAD_B}" stroke="#c8c2b5" stroke-width="1"/>
+      <text x="${PAD_L+plotW/2}" y="${totalH}" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#9a958e">₹ per 100 ${unit}</text>
+    </svg>`;
 
   // Stats
-  const best = rows[rates.indexOf(minRate)];
-  const worst = rows[rates.indexOf(maxRate)];
-  document.getElementById('stats').innerHTML = `
+  document.getElementById('stats-band').innerHTML=`
     <div class="stat-cell">
-      <div class="sc-lbl">Best deal</div>
-      <div class="sc-val" style="color:var(--green)">₹${minRate.toFixed(2)}</div>
-      <div class="sc-sub">per 100 mL (${best.label})</div>
+      <div class="stat-lbl">Best deal</div>
+      <div class="stat-big green">₹${minRate.toFixed(2)}</div>
+      <div class="stat-sub">per 100 ${unit} · ${rows[bestIdx].label}</div>
     </div>
     <div class="stat-cell">
-      <div class="sc-lbl">Costliest per unit</div>
-      <div class="sc-val" style="color:var(--red)">₹${maxRate.toFixed(2)}</div>
-      <div class="sc-sub">per 100 mL (${worst.label})</div>
+      <div class="stat-lbl">Costliest per unit</div>
+      <div class="stat-big red">₹${maxRate.toFixed(2)}</div>
+      <div class="stat-sub">per 100 ${unit} · ${rows[worstIdx].label}</div>
     </div>
     <div class="stat-cell">
-      <div class="sc-lbl">Difference</div>
-      <div class="sc-val">×${(maxRate/minRate).toFixed(2)}</div>
-      <div class="sc-sub">costliest vs cheapest</div>
+      <div class="stat-lbl">Ratio (worst ÷ best)</div>
+      <div class="stat-big">×${(maxRate/minRate).toFixed(2)}</div>
+      <div class="stat-sub">${isProp?'proportional — ratio is 1':'price varies by this factor'}</div>
     </div>
   `;
 
   // Insight
-  const ins = document.getElementById('insight');
-  if(isProp){
-    ins.innerHTML = `All sizes give the same unit rate — price and volume are truly proportional. Every ₹ buys the same amount regardless of container size. This is uncommon in real markets.`;
-  } else {
-    const saving = ((maxRate - minRate) / maxRate * 100).toFixed(1);
-    ins.innerHTML = `The unit rates are different, so price and volume are <strong>not proportional</strong>. The ${best.label} gives <strong>${saving}% more</strong> per rupee than the ${worst.label}. Companies often price small packs at a premium — convenience costs money. Larger packs are cheaper per unit but require more upfront cash and create more plastic waste.`;
-  }
+  const insightText=generateInsight(rows,rates,bestIdx,worstIdx,isProp,unit);
+  document.getElementById('insight-row').innerHTML=`
+    <div class="ins-bar ${isProp?'':'warn'}"></div>
+    <p class="ins-text">${insightText}</p>
+  `;
 }
 
-render();
+buildTabs();render();
 </script>
 </body>
 </html>
