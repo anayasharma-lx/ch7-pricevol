@@ -3,219 +3,233 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Price vs Volume — Ganita Prakash Grade 8</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<title>Price vs Volume — Grade 8</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,800;9..40,900&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#fef6e8;--card:#fffdf5;--paper:#fdf9ee;--ink:#1a1608;--ink2:#4a3f28;--ink3:#8a7d60;--bc:#e8dfc0;
-  --teal:#1a9e8f;--coral:#e8604c;--gold:#d4920a;--violet:#7c5cbf;--sky:#3d8fd6;--green:#2d9e4a;
-  --teal-bg:#e0f5f2;--coral-bg:#fdecea;--gold-bg:#fef5dd;--violet-bg:#f0eafe;
-  --pill-h:#ffeaa0;--pill-stroke:#1a1608;
+  --bg1:#fddcb5;--bg2:#dff2e0;
+  --card:#fff;--border:#1a1a2e;
+  --ink:#1a1a2e;--ink2:#4a4a5a;--ink3:#9090a0;
+  --teal:#4ecdc4;--orange:#ff6b35;--yellow:#ffd93d;--red:#e63946;--purple:#a78bfa;
   --sans:'DM Sans',system-ui,sans-serif;--mono:'DM Mono',monospace;
-  --brd:3px solid #1a1608;--r:18px;
 }
-html,body{min-height:100%;background:linear-gradient(135deg,#fde8c8 0%,#fef6e8 40%,#e8f5e0 100%);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
-body{display:flex;flex-direction:column;padding:24px;gap:20px;min-height:100vh}
+html{background:linear-gradient(135deg,var(--bg1) 0%,#fef6e8 50%,var(--bg2) 100%);min-height:100vh}
+body{font-family:var(--sans);color:var(--ink);min-height:100vh;padding:32px 24px;display:flex;flex-direction:column;align-items:center;gap:0}
 
-/* ── HEADER ── */
-.page-header{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap}
-.chapter-pill{display:inline-flex;align-items:center;gap:6px;background:var(--pill-h);border:var(--brd);border-radius:30px;padding:5px 16px;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink);letter-spacing:.06em;text-transform:uppercase;flex-shrink:0}
-.chapter-pill::before{content:'★';font-size:11px}
-.title-wrap{flex:1}
-.page-title{font-size:clamp(28px,5vw,46px);font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.02em;margin-bottom:6px}
-.page-title .hi1{display:inline-block;background:var(--coral);color:#fff;border:var(--brd);border-radius:12px;padding:2px 14px;font-style:italic;transform:rotate(-1deg)}
-.page-title .hi2{display:inline-block;background:var(--teal);color:#fff;border:var(--brd);border-radius:12px;padding:2px 14px;font-style:italic;transform:rotate(.5deg)}
-.page-desc{font-size:15px;color:var(--ink2);line-height:1.6;max-width:600px}
-.page-desc em{color:var(--coral);font-style:italic;font-weight:700}
+/* PAGE WRAPPER — the big white card */
+.page-card{background:var(--card);border:2px solid var(--border);border-radius:24px;width:100%;max-width:940px;overflow:hidden;position:relative}
 
-/* ── CARDS ── */
-.card{background:var(--card);border:var(--brd);border-radius:var(--r);overflow:hidden}
-.card-head{padding:14px 20px;border-bottom:var(--brd);display:flex;align-items:center;gap:10px}
-.card-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--ink);flex-shrink:0}
-.card-title{font-size:16px;font-weight:800;color:var(--ink)}
+/* HEADER inside card */
+.card-header{padding:28px 36px 20px;border-bottom:1px dashed #d0d0d8}
+.activity-pill{display:inline-flex;align-items:center;gap:6px;background:var(--yellow);border:2px solid var(--border);border-radius:30px;padding:4px 14px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.activity-pill::before{content:'★';font-size:10px}
+.page-title{font-size:clamp(26px,4vw,42px);font-weight:900;line-height:1.05;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.title-pill{background:var(--teal);color:#fff;border:2px solid var(--border);border-radius:14px;padding:4px 18px;font-style:italic;font-size:inherit;display:inline-block}
+.title-pill.orange{background:var(--orange)}
+.page-desc{font-size:15px;color:var(--ink2);line-height:1.6;max-width:560px}
+.page-desc em{color:var(--red);font-style:italic;font-weight:700}
 
-/* ── BAR CHART ── */
-.bars-card{display:flex;flex-direction:column}
-.bars-body{padding:24px 20px 16px;display:flex;align-items:flex-end;gap:16px;min-height:220px;overflow-x:auto}
-.bar-col{display:flex;flex-direction:column;align-items:center;gap:0;flex-shrink:0;min-width:72px;max-width:90px}
-.bar-rate-lbl{font-family:var(--mono);font-size:14px;font-weight:700;padding:4px 10px;border-radius:10px;border:2px solid;text-align:center;white-space:nowrap;margin-bottom:6px}
-.bar-fill{width:60px;border-radius:10px 10px 0 0;border:3px solid var(--ink);border-bottom:none;transition:height .35s cubic-bezier(.4,0,.2,1),background .3s;min-height:8px;position:relative}
-.bar-baseline{width:60px;height:3px;background:var(--ink);border-radius:0}
-.bar-name{font-size:13px;font-weight:700;color:var(--ink2);margin-top:8px;text-align:center}
+/* TWO-COLUMN LAYOUT */
+.card-body{display:grid;grid-template-columns:1fr 300px;min-height:400px}
 
-/* ── TABLE ── */
-.tbl-card table{width:100%;border-collapse:collapse}
-.tbl-card th{padding:10px 16px;text-align:left;font-size:12px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;background:var(--paper);border-bottom:var(--brd)}
-.tbl-card td{padding:10px 16px;border-bottom:2px solid var(--bc);background:var(--card);vertical-align:middle}
-.tbl-card td:nth-child(2),.tbl-card td:nth-child(4){font-family:var(--mono)}
-.price-input{width:88px;padding:6px 10px;border:var(--brd);border-radius:10px;font-family:var(--mono);font-size:15px;font-weight:700;color:var(--ink);background:var(--paper);outline:none;transition:border-color .12s}
-.price-input:focus{border-color:var(--teal)}
-.name-pill{display:inline-block;padding:4px 14px;border-radius:20px;border:2px solid var(--ink);font-weight:700;font-size:14px}
-.rate-val{font-family:var(--mono);font-size:15px;font-weight:700}
-.deal-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;border:2px solid}
-.deal-best{background:var(--teal-bg);color:var(--teal);border-color:var(--teal)}
-.deal-worst{background:var(--coral-bg);color:var(--coral);border-color:var(--coral)}
-.deal-fair{background:var(--paper);color:var(--ink3);border-color:var(--bc)}
-.del-btn{width:32px;height:32px;border:2px solid var(--bc);border-radius:8px;background:transparent;color:var(--ink3);cursor:pointer;font-size:14px;transition:all .12s;display:flex;align-items:center;justify-content:center}
-.del-btn:hover{border-color:var(--coral);color:var(--coral);background:var(--coral-bg)}
-.tbl-footer{padding:12px 20px;border-top:var(--brd);display:flex;gap:10px;background:var(--paper)}
-.act-btn{padding:10px 20px;border:var(--brd);border-radius:12px;font-family:var(--sans);font-size:14px;font-weight:700;cursor:pointer;transition:all .12s}
-.act-btn.add{background:var(--teal);color:#fff;border-color:var(--teal)}
-.act-btn.add:hover{background:#158a7c}
-.act-btn.reset{background:var(--card);color:var(--coral);border-color:var(--coral)}
-.act-btn.reset:hover{background:var(--coral-bg)}
+/* LEFT: BARS + TABLE */
+.left-col{padding:24px 28px;border-right:1px dashed #d0d0d8;display:flex;flex-direction:column;gap:20px}
 
-/* ── VERDICT & INSIGHT ── */
-.verdict-card{padding:16px 20px;font-size:16px;font-weight:700;border-radius:var(--r);border:var(--brd)}
-.verdict-card.prop{background:var(--teal-bg);color:var(--teal)}
-.verdict-card.notprop{background:var(--coral-bg);color:var(--coral)}
-.insight-card{padding:16px 20px;background:var(--gold-bg);border:var(--brd);border-radius:var(--r);font-size:14px;color:var(--ink2);line-height:1.7}
-.insight-card strong{color:var(--ink);font-weight:700}
+/* RIGHT: PANELS */
+.right-col{padding:20px 20px;display:flex;flex-direction:column;gap:16px}
 
-/* ── STATS ROW ── */
-.stats-row{display:flex;gap:12px;flex-wrap:wrap}
-.stat-pill{padding:10px 18px;background:var(--card);border:var(--brd);border-radius:14px;display:flex;flex-direction:column;gap:2px;flex:1;min-width:110px}
-.sp-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3)}
-.sp-val{font-family:var(--mono);font-size:20px;font-weight:700}
+/* SECTION LABEL */
+.sec-lbl{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.sec-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+.sec-name{font-size:14px;font-weight:800;color:var(--ink)}
+.sec-rule{flex:1;border:none;border-top:1px dashed #d0d0d8}
+
+/* BAR CHART */
+.bar-chart{display:flex;align-items:flex-end;gap:14px;min-height:200px;overflow-x:auto;padding-top:40px;padding-bottom:4px}
+.bar-col{display:flex;flex-direction:column;align-items:center;gap:0;flex-shrink:0;min-width:64px}
+.bar-rate{font-family:var(--mono);font-size:13px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:6px;border:1.5px solid;white-space:nowrap;text-align:center}
+.bar-body{width:52px;border-radius:10px 10px 0 0;border:2px solid;transition:height .35s;min-height:8px}
+.bar-ground{width:52px;height:3px;border-radius:0}
+.bar-name{font-size:12px;font-weight:700;color:var(--ink2);margin-top:6px}
+
+/* TABLE */
+.data-table{width:100%;border-collapse:collapse;font-size:14px}
+.data-table th{padding:7px 10px;text-align:left;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);border-bottom:2px solid var(--border)}
+.data-table td{padding:8px 10px;border-bottom:1px solid #e8e8e8;vertical-align:middle}
+.data-table td:nth-child(2),.data-table td:nth-child(4){font-family:var(--mono)}
+.name-tag{display:inline-block;padding:3px 12px;border-radius:20px;font-weight:700;font-size:13px;border:1.5px solid}
+.price-inp{width:76px;padding:5px 8px;border:1.5px solid #d0d0d8;border-radius:8px;font-family:var(--mono);font-size:14px;font-weight:700;color:var(--ink);outline:none;transition:border-color .15s}
+.price-inp:focus{border-color:var(--teal)}
+.rate-num{font-weight:700;font-family:var(--mono);font-size:14px}
+.deal-tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700;border:1.5px solid}
+.del-x{width:28px;height:28px;border:1.5px solid #d0d0d8;border-radius:8px;background:transparent;color:var(--ink3);cursor:pointer;font-size:13px;transition:all .12s}
+.del-x:hover{border-color:var(--red);color:var(--red)}
+.table-btns{display:flex;gap:8px;margin-top:10px}
+.btn{padding:9px 20px;border:2px solid var(--border);border-radius:30px;font-family:var(--sans);font-size:13px;font-weight:800;cursor:pointer;transition:all .15s}
+.btn-add{background:var(--teal);color:#fff;border-color:var(--teal)}
+.btn-add:hover{background:#3ab5ac}
+.btn-reset{background:transparent;color:var(--ink2)}
+.btn-reset:hover{background:#f5f5f5}
+
+/* RIGHT PANELS */
+.info-card{background:#fff;border:2px solid var(--border);border-radius:18px;padding:16px 16px;overflow:hidden}
+.verdict{font-size:14px;font-weight:700;padding:12px 16px;border-radius:12px;border:2px solid}
+.verdict.ok{background:#e8faf9;border-color:var(--teal);color:#2a8f89}
+.verdict.fail{background:#fef0ee;border-color:var(--orange);color:#c0441e}
+.stat-row{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px dashed #e0e0e0}
+.stat-row:last-child{border-bottom:none}
+.stat-lbl{font-size:12px;color:var(--ink3);font-weight:600}
+.stat-val{font-family:var(--mono);font-size:15px;font-weight:700}
+.insight{font-size:13px;line-height:1.6;color:var(--ink2)}
+.insight strong{color:var(--ink);font-weight:700}
+
+/* FLOATING SHAPES */
+.shape{position:fixed;pointer-events:none;z-index:-1}
+.sh-circle{width:56px;height:56px;border-radius:50%;background:#ff6b6b;opacity:.7;top:80px;left:calc(50% - 520px)}
+.sh-triangle{width:0;height:0;border-left:22px solid transparent;border-right:22px solid transparent;border-bottom:38px solid var(--teal);opacity:.7;bottom:200px;right:calc(50% - 520px)}
+.sh-star{font-size:36px;line-height:1;opacity:.6;top:200px;right:calc(50% - 520px)}
+.sh-square{width:38px;height:38px;border-radius:8px;background:var(--purple);opacity:.6;bottom:100px;left:calc(50% - 500px);transform:rotate(15deg)}
+
+@media(max-width:720px){
+  body{padding:16px 12px}
+  .card-body{grid-template-columns:1fr}
+  .left-col{border-right:none;border-bottom:1px dashed #d0d0d8}
+  .card-header{padding:20px 20px 16px}
+}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="page-header">
-  <div class="chapter-pill">Ch 7 · Proportion</div>
-  <div class="title-wrap">
-    <div class="page-title">Price vs <span class="hi1">Volume</span> — <span class="hi2">Fair deal?</span></div>
-    <p class="page-desc">If price is truly proportional to volume, the ₹ per unit is <em>identical</em> for every size. Edit any price below and watch the bars!</p>
+<!-- Floating decorative shapes -->
+<div class="shape sh-circle"></div>
+<div class="shape sh-triangle"></div>
+<div class="shape sh-star">★</div>
+<div class="shape sh-square"></div>
+
+<div class="page-card">
+  <div class="card-header">
+    <div class="activity-pill">Ch 7 · Proportion</div>
+    <div class="page-title">
+      Price vs <span class="title-pill">Volume</span> — fair deal?
+    </div>
+    <p class="page-desc">If price is proportional to volume, every size has the <em>same ₹ per unit</em>. Edit any price and watch the bars update.</p>
+  </div>
+
+  <div class="card-body">
+    <div class="left-col">
+      <!-- BAR CHART -->
+      <div>
+        <div class="sec-lbl"><div class="sec-dot" style="background:var(--teal)"></div><span class="sec-name">₹ per 100 units — equal height = proportional</span><hr class="sec-rule"></div>
+        <div class="bar-chart" id="bar-chart"></div>
+      </div>
+
+      <!-- TABLE -->
+      <div>
+        <div class="sec-lbl"><div class="sec-dot" style="background:var(--orange)"></div><span class="sec-name">Edit prices</span><hr class="sec-rule"></div>
+        <table class="data-table">
+          <thead><tr><th>Size</th><th>Volume</th><th>Price (₹)</th><th>Per 100</th><th>Deal</th><th></th></tr></thead>
+          <tbody id="tbl-body"></tbody>
+        </table>
+        <div class="table-btns">
+          <button class="btn btn-add" id="btn-add">+ Add size</button>
+          <button class="btn btn-reset" id="btn-reset">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-col">
+      <div class="sec-lbl"><div class="sec-dot" style="background:var(--yellow)"></div><span class="sec-name">Result</span><hr class="sec-rule"></div>
+      <div class="verdict" id="verdict"></div>
+
+      <div class="info-card">
+        <div class="sec-lbl" style="margin-bottom:8px"><div class="sec-dot" style="background:var(--purple)"></div><span class="sec-name">Stats</span><hr class="sec-rule"></div>
+        <div id="stats"></div>
+      </div>
+
+      <div class="info-card">
+        <div class="sec-lbl" style="margin-bottom:8px"><div class="sec-dot" style="background:var(--teal)"></div><span class="sec-name">Insight</span><hr class="sec-rule"></div>
+        <p class="insight" id="insight"></p>
+      </div>
+    </div>
   </div>
 </div>
-
-<!-- BAR CHART CARD -->
-<div class="card bars-card">
-  <div class="card-head">
-    <div class="card-dot" style="background:var(--gold)"></div>
-    <div class="card-title">₹ per 100 units — equal bars = proportional pricing</div>
-  </div>
-  <div class="bars-body" id="prod-bar"></div>
-</div>
-
-<!-- TABLE CARD -->
-<div class="card tbl-card">
-  <div class="card-head">
-    <div class="card-dot" style="background:var(--violet)"></div>
-    <div class="card-title">Edit prices — click ✕ to remove a size</div>
-  </div>
-  <table>
-    <thead><tr><th>Name</th><th>Volume</th><th>Price (₹)</th><th>₹ per 100</th><th>Deal?</th><th></th></tr></thead>
-    <tbody id="table-body"></tbody>
-  </table>
-  <div class="tbl-footer">
-    <button class="act-btn add" id="add-row">+ Add size</button>
-    <button class="act-btn reset" id="reset-btn">Reset</button>
-  </div>
-</div>
-
-<!-- VERDICT + STATS -->
-<div class="verdict-card" id="verdict-band"></div>
-
-<div class="stats-row" id="stats-band"></div>
-
-<div class="insight-card" id="insight-row"></div>
 
 <script>
-const PALETTE=['#1a9e8f','#e8604c','#d4920a','#7c5cbf','#3d8fd6','#e07a20'];
-const BG=['#e0f5f2','#fdecea','#fef5dd','#f0eafe','#e8f0fd','#fef0e0'];
-const DEFAULT=[{label:'Small',vol:100,price:18},{label:'Medium',vol:250,price:42},{label:'Large',vol:500,price:80},{label:'XL',vol:1000,price:155}];
-let rows=DEFAULT.map(r=>({...r}));
-function rate(r){return r.price/r.vol*100;}
+const C=['#4ecdc4','#ff6b35','#ffd93d','#a78bfa','#e63946','#2a9d8f'];
+const CB=['#e8faf9','#fef0ee','#fffbe6','#f3eeff','#fef0f0','#e8f7f5'];
+const DEF=[{n:'Small',v:100,p:18},{n:'Medium',v:250,p:42},{n:'Large',v:500,p:80},{n:'XL',v:1000,p:155}];
+let rows=DEF.map(r=>({...r}));
+
+function rate(r){return r.p/r.v*100}
+
 function render(){
-  const rates=rows.map(r=>rate(r));
-  const minR=Math.min(...rates),maxR=Math.max(...rates);
-  const isProp=maxR-minR<0.01;
-  const maxBar=Math.max(...rates)*1.15||10;
+  const rates=rows.map(rate);
+  const mn=Math.min(...rates),mx=Math.max(...rates);
+  const prop=mx-mn<.01;
+  const maxH=mx*1.15||10;
 
-  /* BAR CHART — rate label above bar, name below */
-  const barWrap=document.getElementById('prod-bar');
-  barWrap.innerHTML='';
+  /* bars */
+  const bc=document.getElementById('bar-chart');bc.innerHTML='';
   rows.forEach((r,i)=>{
-    const rt=rate(r);
-    const h=Math.max(20,Math.round(rt/maxBar*160));
-    const col=PALETTE[i%PALETTE.length];
-    const bg=BG[i%BG.length];
-    const col2=document.createElement('div');
-    col2.className='bar-col';
-    col2.innerHTML=`
-      <div class="bar-rate-lbl" style="color:${col};border-color:${col};background:${bg}">₹${rt.toFixed(1)}</div>
-      <div class="bar-fill" style="height:${h}px;background:${bg};border-color:${col}"></div>
-      <div class="bar-baseline" style="background:${col};width:60px"></div>
-      <div class="bar-name">${r.label}</div>`;
-    barWrap.appendChild(col2);
+    const rt=rate(r),h=Math.max(12,Math.round(rt/maxH*130));
+    const col=C[i%C.length],cbg=CB[i%CB.length];
+    const d=document.createElement('div');d.className='bar-col';
+    d.innerHTML=`<div class="bar-rate" style="color:${col};border-color:${col};background:${cbg}">₹${rt.toFixed(1)}</div>
+      <div class="bar-body" style="height:${h}px;background:${cbg};border-color:${col}"></div>
+      <div class="bar-ground" style="background:${col}"></div>
+      <div class="bar-name">${r.n}</div>`;
+    bc.appendChild(d);
   });
 
-  /* TABLE */
-  const tbody=document.getElementById('table-body');
-  tbody.innerHTML='';
+  /* table */
+  const tb=document.getElementById('tbl-body');tb.innerHTML='';
   rows.forEach((r,i)=>{
-    const rt=rate(r);
-    const col=PALETTE[i%PALETTE.length];
-    const bg=BG[i%BG.length];
-    const isMin=Math.abs(rt-minR)<0.01;
-    const isMax=Math.abs(rt-maxR)<0.01&&!isProp;
-    const dealCls=isProp?'deal-fair':isMin?'deal-best':isMax?'deal-worst':'deal-fair';
-    const dealTxt=isProp?'Fair ✓':isMin?'🏆 Best':'😬 Worst';
+    const rt=rate(r),col=C[i%C.length],cbg=CB[i%CB.length];
+    const isBest=Math.abs(rt-mn)<.01,isWorst=Math.abs(rt-mx)<.01&&!prop;
+    const dealCol=prop?'#9090a0':isBest?C[0]:isWorst?C[4]:'#9090a0';
+    const dealBg=prop?'#f5f5f5':isBest?CB[0]:isWorst?CB[4]:'#f5f5f5';
+    const dealTxt=prop?'Fair':isBest?'🏆 Best':isWorst?'😬 Pricey':'Ok';
     const tr=document.createElement('tr');
-    tr.innerHTML=`
-      <td><span class="name-pill" style="background:${bg};border-color:${col};color:${col}">${r.label}</span></td>
-      <td>${r.vol.toLocaleString('en-IN')}</td>
-      <td><input class="price-input" type="number" value="${r.price}" min="1" max="9999" step="0.5" data-i="${i}"></td>
-      <td><span class="rate-val" style="color:${col}">₹${rt.toFixed(2)}</span></td>
-      <td><span class="deal-badge ${dealCls}">${dealTxt}</span></td>
-      <td><button class="del-btn" data-i="${i}">✕</button></td>`;
-    tbody.appendChild(tr);
+    tr.innerHTML=`<td><span class="name-tag" style="color:${col};border-color:${col};background:${cbg}">${r.n}</span></td>
+      <td>${r.v}</td>
+      <td><input class="price-inp" type="number" value="${r.p}" min="1" max="9999" step=".5" data-i="${i}"></td>
+      <td><span class="rate-num" style="color:${col}">₹${rt.toFixed(2)}</span></td>
+      <td><span class="deal-tag" style="color:${dealCol};border-color:${dealCol};background:${dealBg}">${dealTxt}</span></td>
+      <td><button class="del-x" data-i="${i}">✕</button></td>`;
+    tb.appendChild(tr);
   });
-  tbody.querySelectorAll('.price-input').forEach(inp=>{
-    inp.addEventListener('input',e=>{
-      const v=parseFloat(e.target.value);
-      if(!isNaN(v)&&v>0)rows[+e.target.dataset.i].price=v;
-      render();
-    });
+  tb.querySelectorAll('.price-inp').forEach(el=>{
+    el.addEventListener('input',e=>{const v=parseFloat(e.target.value);if(v>0)rows[+e.target.dataset.i].p=v;render();});
   });
-  tbody.querySelectorAll('.del-btn').forEach(btn=>{
-    btn.addEventListener('click',e=>{
-      const i=+e.target.dataset.i;
-      if(rows.length>2){rows.splice(i,1);render();}
-    });
+  tb.querySelectorAll('.del-x').forEach(el=>{
+    el.addEventListener('click',e=>{if(rows.length>2)rows.splice(+e.target.dataset.i,1);render();});
   });
 
-  /* VERDICT */
-  const vb=document.getElementById('verdict-band');
-  vb.className='verdict-card '+(isProp?'prop':'notprop');
-  vb.textContent=isProp?'✓ All sizes give the same ₹ per unit — prices ARE proportional!':'✗ The ₹ per unit varies between sizes — prices are NOT proportional.';
+  /* verdict */
+  const vd=document.getElementById('verdict');
+  vd.className='verdict '+(prop?'ok':'fail');
+  vd.textContent=prop?'✓ Proportional — same ₹ per unit for every size.':'✗ Not proportional — rate varies between sizes.';
 
-  /* STATS */
-  document.getElementById('stats-band').innerHTML=`
-    <div class="stat-pill"><div class="sp-lbl">Cheapest per unit</div><div class="sp-val" style="color:var(--teal)">₹${minR.toFixed(2)}</div></div>
-    <div class="stat-pill"><div class="sp-lbl">Most expensive</div><div class="sp-val" style="color:var(--coral)">₹${maxR.toFixed(2)}</div></div>
-    <div class="stat-pill"><div class="sp-lbl">Difference</div><div class="sp-val">₹${(maxR-minR).toFixed(2)}</div></div>
-    <div class="stat-pill"><div class="sp-lbl">Sizes</div><div class="sp-val">${rows.length}</div></div>`;
+  /* stats */
+  document.getElementById('stats').innerHTML=`
+    <div class="stat-row"><span class="stat-lbl">Cheapest per 100u</span><span class="stat-val" style="color:${C[0]}">₹${mn.toFixed(2)}</span></div>
+    <div class="stat-row"><span class="stat-lbl">Priciest per 100u</span><span class="stat-val" style="color:${C[4]}">₹${mx.toFixed(2)}</span></div>
+    <div class="stat-row"><span class="stat-lbl">Gap</span><span class="stat-val">₹${(mx-mn).toFixed(2)}</span></div>`;
 
-  /* INSIGHT */
-  document.getElementById('insight-row').innerHTML=isProp
-    ?`<strong>🎉 Equal rates!</strong> Every size costs ₹${minR.toFixed(2)} per 100 units — the price is directly proportional to volume.`
-    :`<strong>💡 ${rows[rates.indexOf(minR)].label}</strong> gives the best value (₹${minR.toFixed(2)}/100u). <strong>${rows[rates.indexOf(maxR)].label}</strong> is the worst (₹${maxR.toFixed(2)}/100u). If proportional, all bars would be equal height.`;
+  /* insight */
+  const bi=rows[rates.indexOf(mn)],wi=rows[rates.indexOf(mx)];
+  document.getElementById('insight').innerHTML=prop
+    ?`All sizes cost <strong>₹${mn.toFixed(2)}</strong> per 100 units — price is directly proportional to volume.`
+    :`<strong>${bi.n}</strong> gives best value (₹${mn.toFixed(2)}/100u). <strong>${wi.n}</strong> is the priciest (₹${mx.toFixed(2)}/100u). Proportional pricing would make all bars equal.`;
 }
 
-document.getElementById('add-row').addEventListener('click',()=>{
-  const vols=[100,200,300,400,500,600,750,1000,1500,2000];
-  const used=rows.map(r=>r.vol);
-  const nextVol=vols.find(v=>!used.includes(v))||rows[rows.length-1].vol+100;
-  const baseRate=rate(rows[0]);
-  rows.push({label:'Size '+(rows.length+1),vol:nextVol,price:+(baseRate*nextVol/100).toFixed(0)});
-  render();
+document.getElementById('btn-add').addEventListener('click',()=>{
+  const used=rows.map(r=>r.v);
+  const next=[100,200,300,400,500,600,750,1000,1500,2000].find(v=>!used.includes(v))||rows.at(-1).v+100;
+  rows.push({n:'Size '+(rows.length+1),v:next,p:+(rate(rows[0])*next/100).toFixed(0)});render();
 });
-document.getElementById('reset-btn').addEventListener('click',()=>{rows=DEFAULT.map(r=>({...r}));render();});
+document.getElementById('btn-reset').addEventListener('click',()=>{rows=DEF.map(r=>({...r}));render();});
 render();
 </script>
 </body>
